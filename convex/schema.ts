@@ -1,5 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v, Validator } from "convex/values";
+import { use } from "react";
 export const userSchema = {
     email: v.string(),
     name: v.optional(v.string()),
@@ -68,8 +69,36 @@ const authTables = {
 
 export default defineSchema({
     ...authTables,
-    tasks: defineTable({
+    todos: defineTable({
+        userId: v.id("users"),
+        projectId: v.id("projects"),
+        labelId:v.id("labels"),
+        taskName: v.string(),
+        description: v.optional(v.string()),
+        dueDate: v.number(),
+        priority: v.optional(v.float64()),
         isCompleted: v.boolean(),
-        text: v.string(),
+    }),
+    subTodos: defineTable({
+        userId: v.id("users"),
+        projectId: v.id("projects"),
+        labelId:v.id("labels"),
+        parentId: v.id("todos"),
+        taskName: v.string(),
+        description: v.optional(v.string()),
+        dueDate: v.number(),
+        priority: v.optional(v.float64()),
+        isCompleted: v.boolean(),
+    }),
+    labels: defineTable({
+        userId: v.id("users"),
+        name: v.string(),
+        type: v.union(v.literal("user"), v.literal("todo")),
+    }),
+
+    projects: defineTable({
+        userId: v.id("users"),
+        name: v.string(),
+        type: v.union(v.literal("user"), v.literal("todo")),
     }),
   });
