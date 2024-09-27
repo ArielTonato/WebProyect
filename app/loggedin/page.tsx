@@ -12,7 +12,7 @@ export default function Home() {
       <SideBar />
       <div className="flex flex-col">
         <MobileNav />
-        <main className="flex flex-1 flec-col gap-4 p-4 lg:px-8">
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:px-8">
           <TodoList />
         </main>
       </div>
