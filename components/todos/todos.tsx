@@ -6,28 +6,30 @@ import { api } from '@/convex/_generated/api';
 import { Doc } from '@/convex/_generated/dataModel';
 import { useToast } from '@/hooks/use-toast';
 
-export default function Todos({items}: any) {
-  const {toast} = useToast();
+export default function Todos({ items }: any) {
+  const { toast } = useToast();
   const checkATodo = useMutation(api.todos.checkATodo);
   const unCheckATodo = useMutation(api.todos.unCheckATodo);
   const handleOnChangeTodo = (task: Doc<"todos">) => {
     if (task.isCompleted) {
-      unCheckATodo({taskId: task._id});
+      unCheckATodo({ taskId: task._id });
     } else {
       toast({
         title: 'Tarea Completada',
         description: '¡Bien hecho! 🎉',
         duration: 2000,
       })
-      checkATodo({taskId: task._id});
+      checkATodo({ taskId: task._id });
     }
   };
 
-  return items.map((task:any, idx:any) => (
-    <Task 
-    key={task._id}
-    {...task} 
-    handleOnChange={() => handleOnChangeTodo(task)}
-     />
-))
+  return items.map((task: Doc<"todos">, idx: number) => (
+    <Task
+      _id={task._id}
+      key={task._id}
+      data={task}
+      isCompleted={task.isCompleted}
+      handleOnChange={() => handleOnChangeTodo(task)}
+    />
+  ));
 }
