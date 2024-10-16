@@ -1,6 +1,6 @@
 "use client";
 
-import { ConvexProvider, ConvexProviderWithAuth, ConvexReactClient } from "convex/react";
+import { ConvexProviderWithAuth, ConvexReactClient } from "convex/react";
 import { Session } from "next-auth";
 import { SessionProvider, useSession } from "next-auth/react";
 import { ReactNode, useMemo } from "react";
