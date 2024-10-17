@@ -1,6 +1,5 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v, Validator } from "convex/values";
-import { use } from "react";
 export const userSchema = {
     email: v.string(),
     name: v.optional(v.string()),
