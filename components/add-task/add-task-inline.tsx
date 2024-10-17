@@ -131,7 +131,6 @@ export default function AddTaskInline({
     }
     return (
         <div>
-            {JSON.stringify(form.getValues(), null, 2)}
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 border-2 p-2 border-gray-200 my-2 rounded-xl px-3 pt-4 border-foreground/20">
                     <FormField
