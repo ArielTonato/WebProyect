@@ -16,7 +16,6 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { description } from '../nav/side-bar';
 import { CalendarIcon, Text } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { CardFooter } from "../ui/card";
@@ -30,7 +29,7 @@ import { Doc, Id } from "@/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { getProjects } from '../../convex/projects';
 import { api } from "@/convex/_generated/api";
-import moment, { duration } from "moment";
+import moment, { duration } from "moment"; 
 import { createASubTodo } from '../../convex/subTodos';
 
 
@@ -132,7 +131,7 @@ export default function AddTaskInline({
     return (
         <div>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 border-2 p-2 border-gray-200 my-2 rounded-xl px-3 pt-4 border-foreground/20">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 bg-white border-2 p-2 border-gray-200 my-2 rounded-xl px-3 pt-4 border-foreground/20">
                     <FormField
                         control={form.control}
                         name="taskName"
