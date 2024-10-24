@@ -7,14 +7,24 @@ import { api } from "@/convex/_generated/api";
 
 export default function SuggestMissingTasks({
     projectId,
+    isSubTask = false,
+    taskName = '',
+    description = '',
+    parentId
 }:
     {
         projectId: Id<"projects">;
+        isSubTask?: boolean;
+        taskName?: string, 
+        description?: string, 
+        parentId: Id<"todos">;
     }) {
 
     const [isLoadingSuggestMissingTasks, setIsLoadingSuggestMissingTasks] = useState(false);
 
     const suggestMissingTasks = useAction(api.openai.suggestMissingItemsWithAi) || [];
+
+    const suggestMissingSubTasks = useAction(api.openai.suggestMissingSubItemsWithAi) || [];
 
     const handleMissingTasks = async () => {
         setIsLoadingSuggestMissingTasks(true);
@@ -22,7 +32,19 @@ export default function SuggestMissingTasks({
         try {
             await suggestMissingTasks({ projectId });
         } catch (error) {
-            console.log("Error in suggestMissingTasks", error);
+            console.log("Error al sugerir Tareas", error);
+        } finally {
+            setIsLoadingSuggestMissingTasks(false);
+        }
+    };
+
+    const handleMissingSubTasks = async () => {
+        setIsLoadingSuggestMissingTasks(true);
+
+        try {
+            await suggestMissingSubTasks({ projectId, taskName, description, parentId });
+        } catch (error) {
+            console.log("Error al sugerir Tareas", error);
         } finally {
             setIsLoadingSuggestMissingTasks(false);
         }
@@ -31,7 +53,7 @@ export default function SuggestMissingTasks({
         <Button
             variant={"outline"}
             disabled={isLoadingSuggestMissingTasks}
-            onClick={handleMissingTasks}
+            onClick={isSubTask ? handleMissingSubTasks: handleMissingTasks}
         >
             {isLoadingSuggestMissingTasks ? (
                 <div className="flex gap-2">
@@ -39,7 +61,7 @@ export default function SuggestMissingTasks({
                     <Loader className="h-5 w-5 text-primary" />
                 </div>
             ) : (
-                "Suggest Missing Tasks (AI) ❤️"
+                "Sugerir Tareas (AI) 🅰️"
             )}
         </Button>
     );

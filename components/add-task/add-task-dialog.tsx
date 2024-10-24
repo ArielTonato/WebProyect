@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import Task from "../todos/task";
 import { unCheckASubTodo } from '../../convex/subTodos';
 import { AddTaskWrapper } from "./add-task-button";
+import SuggestMissingTasks from "./suggest-tasks";
 
 export default function AddTaskDialog({ data }: {
     data: Doc<"todos">;
@@ -23,8 +24,8 @@ export default function AddTaskDialog({ data }: {
 
     const project = useQuery(api.projects.getProjectByProjectId, { projectId });
     const labels = useQuery(api.labels.getLabelByLabelId, { labelId });
-    const inCompleteSubTodosByProject = useQuery(api.subTodos.inCompleteSubTodos) ?? [];
-    const completedSubTodosByProject = useQuery(api.subTodos.completedSubTodos) ?? [];
+    const inCompleteSubTodosByProject = useQuery(api.subTodos.inCompleteSubTodos, { parentId: _id }) ?? [];
+    const completedSubTodosByProject = useQuery(api.subTodos.completedSubTodos, { parentId: _id }) ?? [];
     const checkASubTodoMutation = useMutation(api.subTodos.checkASubTodo);
     const unCheckASubTodoMutation = useMutation(api.subTodos.unCheckASubTodo);
 
@@ -75,11 +76,13 @@ h-5 text-primary" />
                             <p className="font-bold flex text-sm text-gray-700">Sub-Tareas</p>
                         </div>
                         <div>
-                            <Button
-                                variant={"outline"}
-                            >
-                                Sugerir Sub-Tareas (IA) 🅰️
-                            </Button>
+                            <SuggestMissingTasks
+                                projectId={projectId}
+                                taskName={taskName}
+                                description={description}
+                                parentId={_id}
+                                isSubTask={true}
+                            />
                         </div>
                     </div>
                     <div className="pl-4">
