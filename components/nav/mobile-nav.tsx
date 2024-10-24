@@ -1,35 +1,15 @@
 import {
-    CircleUser,
-    Home,
-    LineChart,
     Menu,
-    Package,
-    Package2,
+    PlusIcon,
     Search,
-    ShoppingCart,
-    Users,
 } from "lucide-react"
 import Link from "next/link"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { primaryNavsItems } from "@/utils"
 import UserProfile from "./user-profile"
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog"
 export default function MobileNav() {
     return (
         <div className="flex flex-col">
@@ -60,6 +40,19 @@ export default function MobileNav() {
                                     </Link>
                                 ))
                             }
+                            <Dialog>
+                                <DialogTrigger id="closeDialog">
+                                    <p className="flex justify-between items-center">
+                                        Mis proyectos
+                                        <PlusIcon className="h-5 w-5" aria-label="Add a Project" />
+                                    </p>
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <div>
+                                        <h1 className="text-lg font-semibold">Add a Project</h1>
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
                         </nav>
                     </SheetContent>
                 </Sheet>
