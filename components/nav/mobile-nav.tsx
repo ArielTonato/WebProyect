@@ -1,4 +1,5 @@
 import {
+    BrainCircuit,
     Menu,
     PlusIcon,
     Search,
@@ -10,6 +11,8 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { primaryNavsItems } from "@/utils"
 import UserProfile from "./user-profile"
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog"
+import SearchForm from "./search-form"
+import { cn } from "@/lib/utils"
 export default function MobileNav() {
     return (
         <div className="flex flex-col">
@@ -56,17 +59,20 @@ export default function MobileNav() {
                         </nav>
                     </SheetContent>
                 </Sheet>
-                <div className="w-full flex-1">
-                    <form>
-                        <div className="relative">
-                            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                            <Input
-                                type="search"
-                                placeholder="Search products..."
-                                className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-                            />
-                        </div>
-                    </form>
+                <div className="flex items-center md:justify-between w-full gap-1 md:gap-2 py2">
+                    <div className="lg:flex-1">
+                        <Link href={""}>
+                            <p className="text-sm font-semibold text-foreground/70 w-28">
+                               / Mis Proyectos
+                            </p>
+                        </Link>
+                    </div>
+                    <div className="place-content-center w-full flex-1">
+                        <SearchForm />
+                    </div>
+                    <div className="place-content-center w-12 h-12 lg:w-16 lg:h-20">
+                        <BrainCircuit className="h-8 w-8 text-primary" />
+                    </div>
                 </div>
             </header>
         </div>
