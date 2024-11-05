@@ -29,13 +29,10 @@ export const searchTasks = action({
     try {
       const userId = await handleUserId(ctx);
       if (userId) {
-        // 1. Generate an embedding from you favorite third party API:
         const embedding = await getEmbeddingsWithAI(query);
-
-        // 2. Then search for similar foods!
         const results = await ctx.vectorSearch("todos", "by_embedding", {
           vector: embedding,
-          limit: 16,
+          limit: 1,
           filter: (q) => q.eq("userId", userId),
         });
         const rows: any = await ctx.runQuery(

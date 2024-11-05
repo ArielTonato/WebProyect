@@ -45,7 +45,7 @@ function AddProjectDialogContent() {
     }
 
     return (
-        <DialogContent className="max-w-xl lg:h-56 flex flex-col lg:justify-between text-right">
+        <DialogContent className="max-w-xl lg:h-26 flex flex-col  text-right">
             <DialogHeader className="w-full">
                 <DialogTitle>Agregar Proyecto</DialogTitle>
             </DialogHeader>
