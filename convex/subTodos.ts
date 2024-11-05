@@ -178,8 +178,6 @@ export const deleteASubTodo = mutation({
       const userId = await handleUserId(ctx);
       if (userId) {
         const deletedTaskId = await ctx.db.delete(taskId);
-        //query todos and map through them and delete
-
         return deletedTaskId;
       }
 
