@@ -4,15 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { toast, useToast } from "@/hooks/use-toast"
+import { toast } from "@/hooks/use-toast"
 
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -26,11 +24,10 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Doc, Id } from "@/convex/_generated/dataModel";
-import { useMutation, useQuery } from "convex/react";
-import { getProjects } from '../../convex/projects';
+import { useAction, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import moment, { duration } from "moment"; 
-import { createASubTodo } from '../../convex/subTodos';
+import moment from "moment"; 
+import { GET_STARTED_PROJECT_ID } from "@/utils";
 
 
 const FormSchema = z.object({
@@ -56,21 +53,23 @@ const FormSchema = z.object({
 
 export default function AddTaskInline({ 
     setShowAddTask,
-    parentTask
+    parentTask,
+    projectId: myProjectId,
  }: {
     setShowAddTask: Dispatch<SetStateAction<boolean>>,
-    parentTask?: Doc<"todos">
+    parentTask?: Doc<"todos">,
+    projectId?: Id<"projects">
 }) {
-    const projectId = parentTask?.projectId || "k97en8g66cnpfqf2bmjnkp151d71ehnh";
-    const labelId = parentTask?.labelId || "k57fd2xsbkv0cxmh2wbvwt9ryh71esg7";
+    const projectId =  myProjectId || parentTask?.projectId || GET_STARTED_PROJECT_ID as Id<"projects">;
+    const labelId = parentTask?.labelId || "k57fd2xsbkv0cxmh2wbvwt9ryh71esg7" as Id<"labels">;
     const priority = parentTask?.priority?.toString() || "1";
     const parentId = parentTask?._id;
 
     const projects = useQuery(api.projects.getProjects);
     const labels = useQuery(api.labels.getLabels);
 
-    const createATodoMutation = useMutation(api.todos.createATodo);
-    const createASubTodoMutation = useMutation(api.subTodos.createASubTodo);
+    const createATodoMutation = useAction(api.todos.createTodoAndEmbeddings);
+    const createASubTodoMutation = useAction(api.subTodos.createSubTodoAndEmbeddings);
     const defaultValues = {
         taskName: "",
         description: "",

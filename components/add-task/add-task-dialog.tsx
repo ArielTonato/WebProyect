@@ -1,7 +1,7 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
-import { Calendar, ChevronDown, Flag, Hash, Tag } from "lucide-react";
+import { Calendar, ChevronDown, Flag, Hash, Tag, Trash2 } from "lucide-react";
 import { Label } from "../ui/label";
 import { format } from "date-fns";
 import { useMutation, useQuery } from "convex/react";
@@ -11,6 +11,8 @@ import Task from "../todos/task";
 import { unCheckASubTodo } from '../../convex/subTodos';
 import { AddTaskWrapper } from "./add-task-button";
 import SuggestMissingTasks from "./suggest-tasks";
+import { deleteATodo } from '../../convex/todos';
+import { toast } from "@/hooks/use-toast";
 
 export default function AddTaskDialog({ data }: {
     data: Doc<"todos">;
@@ -28,6 +30,7 @@ export default function AddTaskDialog({ data }: {
     const completedSubTodosByProject = useQuery(api.subTodos.completedSubTodos, { parentId: _id }) ?? [];
     const checkASubTodoMutation = useMutation(api.subTodos.checkASubTodo);
     const unCheckASubTodoMutation = useMutation(api.subTodos.unCheckASubTodo);
+    const deleteATodoMutation = useMutation(api.todos.deleteATodo);
 
     const [todoDetails, setTodoDetails] = useState([]);
     useEffect(() => {
@@ -57,6 +60,16 @@ export default function AddTaskDialog({ data }: {
         setTodoDetails(data);
     }, [labels?.name, project]);
 
+    const handleDeleteTodo =  (e:any) => {
+        e.preventDefault();
+       const deleteId = deleteATodoMutation({ taskId: _id });
+        if(deleteId !== undefined){
+            toast({
+                title: "Tarea Eliminada 🗑️",
+                duration: 3000,
+            })
+        }
+    }
 
     return (
         <DialogContent className="max-w-4xl md:h-4/6 flex flex-col md:flex-row md:justify-between text-right">
@@ -129,7 +142,15 @@ h-5 text-primary" />
                         </div>
                     </div>
                 ))}
+                <div className="flex gap-2 p-4 w-full justify-end">
+                    <form onSubmit={(e) => handleDeleteTodo(e)}>
+                        <button type="submit">
+                        <Trash2 className="w-4 h-4" />
+                        </button>
+                    </form>
+                </div>
             </div>
+
         </DialogContent>
     )
 }

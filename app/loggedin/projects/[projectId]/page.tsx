@@ -10,6 +10,7 @@ import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 import { totalTodos, completedTodos } from '../../../../convex/todos';
 import SuggestMissingTasks from "@/components/add-task/suggest-tasks";
+import DeleteProject from "@/components/projects/delete-project";
 
 export default function ProjectIdPage() {
     const { projectId } = useParams<{
@@ -24,25 +25,29 @@ export default function ProjectIdPage() {
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
             <SideBar />
             <div className="flex flex-col">
-                <MobileNav />
+                <MobileNav navTitle="Mis Proyectos" navLink="/loggedin/projects" />
                 <main className="flex flex-1 flex-col gap-4 p-4 lg:px-8">
-                    <div className="flex items-center justify-between">
-                        <h1 className="text-lg font-semibold md:text-2xl">{projectName}</h1>
-                        <div className="flex gap-6 lg:gap-12 items-center">
-                            <SuggestMissingTasks projectId={
-                                projectId
-                            } />
+                    <div className="xl:px-40">
+                        <div className="flex items-center justify-between">
+                            <h1 className="text-lg font-semibold md:text-2xl">{projectName}</h1>
+                            <div className="flex gap-6 lg:gap-12 items-center">
+                                <SuggestMissingTasks projectId={
+                                    projectId
+                                } />
+                                <DeleteProject projectId = {projectId} />
+                            </div>
                         </div>
                     </div>
-                    <Todos items={incompletedTodosByProject} />
-                    <div className="pb-6">
-                        <AddTaskWrapper />
+                    <div className="flex flex-col gap-1 mt-4">
+                        <Todos items={incompletedTodosByProject} />
+                        <div className="pb-6">
+                            <AddTaskWrapper projectId={projectId} />
+                        </div>
+
+                        <Todos items={completedTodosByProject} />
+
+                        <CompletedTodos totalTodos={projectTodosTotal} />
                     </div>
-
-                    <Todos items={completedTodosByProject} />
-
-                    <CompletedTodos totalTodos={projectTodosTotal} />
-
                 </main>
             </div>
         </div>

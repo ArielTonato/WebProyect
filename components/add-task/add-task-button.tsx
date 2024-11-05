@@ -3,12 +3,18 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import AddTaskInLine from "./add-task-inline";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 
-export const AddTaskWrapper = ({parentTask}:{
-    parentTask?: Doc<"todos">
+export const AddTaskWrapper = ({
+    parentTask,
+    projectId
+}:{
+    parentTask?: Doc<"todos">;
+    projectId?: Id<"projects">
 }) => {
     const [showAddTask, setShowAddTask] = useState(false);
 
-    return showAddTask ? <AddTaskInLine setShowAddTask={setShowAddTask} parentTask={parentTask} /> : <AddTaskButton onClick={
+    return showAddTask ? <AddTaskInLine setShowAddTask={setShowAddTask} parentTask={parentTask} 
+    projectId={projectId}
+    /> : <AddTaskButton onClick={
         () => setShowAddTask(true)
     } title = {parentTask?._id ? "Añadir Subtarea" : "Añadir Tarea"} 
     />;
