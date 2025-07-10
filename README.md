@@ -262,12 +262,3 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - 📖 Documentación: [Wiki del Proyecto](https://github.com/tu-usuario/todome/wiki)
 
 ---
-
-<div align="center">
-
-**Hecho con ❤️ y IA**
-
-[![GitHub stars](https://img.shields.io/github/stars/tu-usuario/todome?style=social)](https://github.com/ArielTonato/WebProyect)
-[![GitHub forks](https://img.shields.io/github/forks/tu-usuario/todome?style=social)](https://github.com/ArielTonato/WebProyect)
-
-</div>
