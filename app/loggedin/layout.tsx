@@ -1,6 +1,7 @@
-import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { Providers } from "../providers";
 import { auth } from "@/auth";
+import { AuthGuard } from "@/components/auth/auth-guard";
 
 export default async function LoggedInLayout({
     children,
@@ -8,5 +9,17 @@ export default async function LoggedInLayout({
     children: React.ReactNode;
   }>) {
     const session = await auth();
-    return <Providers session={session}>{children}</Providers>;
+    
+    // Redirigir a la página principal si no hay sesión
+    if (!session) {
+      redirect("/");
+    }
+
+    return (
+      <Providers session={session}>
+        <AuthGuard>
+          {children}
+        </AuthGuard>
+      </Providers>
+    );
   }
