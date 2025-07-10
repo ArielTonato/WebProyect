@@ -27,6 +27,18 @@ TodoME es una aplicación web moderna de gestión de tareas que combina funciona
 - 📱 **Diseño Responsivo**: Experiencia optimizada en todos los dispositivos
 - ⚡ **Tiempo Real**: Actualizaciones instantáneas sin recargar la página
 
+## 📸 Capturas de Pantalla
+
+<div align="center">
+
+### Landing Page - Interfaz Principal
+![TodoME Landing Page](https://res.cloudinary.com/aridev21/image/upload/v1752115035/p2_g9t2bd.png)
+
+### Dashboard - Gestión de Tareas
+![TodoME Dashboard](https://res.cloudinary.com/aridev21/image/upload/v1752115031/p2.1_g2ee9m.png)
+
+</div>
+
 ## 🛠️ Tecnologías Utilizadas
 
 ### Frontend
@@ -198,8 +210,9 @@ npm run build
 ```
 
 1. Conecta tu repositorio a Vercel
-2. Configura las variables de entorno
-3. Despliega automáticamente
+2. Configura las variables de entorno en CONVEX
+3. Configura las variables de entorno de VERCEL
+4. Despliega automáticamente
 
 ### Otros Proveedores
 - **Netlify**: Compatible con Next.js
