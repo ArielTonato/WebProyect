@@ -31,11 +31,11 @@ TodoME es una aplicación web moderna de gestión de tareas que combina funciona
 
 <div align="center">
 
-### Landing Page - Interfaz Principal
+### Landing Page
 ![TodoME Landing Page](https://res.cloudinary.com/aridev21/image/upload/v1752115035/p2_g9t2bd.png)
 
-### Dashboard - Gestión de Tareas
-![TodoME Dashboard](https://res.cloudinary.com/aridev21/image/upload/v1752115031/p2.1_g2ee9m.png)
+### Interfaz Principal - Gestión de Tareas
+![TodoME Dashboard](https://res.cloudinary.com/aridev21/image/upload/v1752116254/p2.1_kbsdif.png)
 
 </div>
 
