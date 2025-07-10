@@ -87,8 +87,12 @@ pnpm install
 Crea un archivo `.env.local` en la raíz del proyecto:
 
 ```env
+#GENERAL
+AUTH_SECRET=your_secret
+
 # Convex
 NEXT_PUBLIC_CONVEX_URL=your_convex_url
+CONVEX_AUTH_ADAPTER_SECRET=your_convex_auth_adapter_secret
 CONVEX_AUTH_PRIVATE_KEY=your_convex_auth_private_key
 JWKS=your_jwks_url
 
@@ -98,25 +102,14 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 # OpenAI
 OPEN_AI_KEY=your_openai_api_key
-
-# NextAuth
-NEXTAUTH_SECRET=your_nextauth_secret
-NEXTAUTH_URL=http://localhost:3000
 ```
 
 ### 4. Configurar Convex
-```bash
-# Inicializar Convex (si es necesario)
-npx convex dev
-```
+Agregar las variables de entorno en Convex ir a **Proyectos** luego a **Environment Variables** y poner las mismas variables que en el **.env**
 
 ### 5. Ejecutar el Proyecto
 ```bash
-# Terminal 1: Servidor de desarrollo Next.js
 npm run dev
-
-# Terminal 2: Servidor de desarrollo Convex
-npm run back
 ```
 
 Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
@@ -274,7 +267,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 **Hecho con ❤️ y IA**
 
-[![GitHub stars](https://img.shields.io/github/stars/tu-usuario/todome?style=social)](https://github.com/tu-usuario/todome)
-[![GitHub forks](https://img.shields.io/github/forks/tu-usuario/todome?style=social)](https://github.com/tu-usuario/todome)
+[![GitHub stars](https://img.shields.io/github/stars/tu-usuario/todome?style=social)](https://github.com/ArielTonato/WebProyect)
+[![GitHub forks](https://img.shields.io/github/forks/tu-usuario/todome?style=social)](https://github.com/ArielTonato/WebProyect)
 
 </div>
